@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="columns is-centered">
+    <div class="box column is-one-third">
+      <h1 class="title has-text-centered">Password Generator</h1>
+
+      <div class="field">
+        <label>Length</label>
+        <!-- binding the input with the "input" binding property and passing in the event arguement to log the input.  -->
+        <input class="input" (input)="onChangeLength($event.target.value)" />
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseLetters()" type="checkbox" />
+            Use Letters
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input (change)="onChangeUseNumbers()" type="checkbox" />
+            Use Numbers
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <!-- event binding on change -->
+            <input (change)="onChangeUseSymbols()" type="checkbox" />
+            Use Symbols
+          </label>
+        </div>
+      </div>
+
+      <!-- property binding to make the button [disabled] if there is no lenght given and if it does not include letters, symbols or numbers -->
+      <button
+        [disabled]="
+          !(length && (includeLetters || includeSymbols || includeNumbers))
+        "
+        (click)="onButtonClick()"
+        class="button is-link is-fullwidth"
+      >
+        Generate!
+      </button>
+      <!-- using the structural directive *ngIF to show the div element only if the password value is present which makes the condition true -->
+      <div class="box" *ngIf="password">
+        <label>Your Password</label>
+        <!-- property binding to get the value from the password in our component file.  -->
+        <input class="input" [value]="password" />
+      </div>
+    </div>
+  </div>
+</div>
